@@ -29,7 +29,7 @@ def get_posts(url, raw):
         The end argument is to set a limit to the number of pages to crawl. If
         placed to 0 it will be all pages.
         """
-        posts = crawl_pages(nodes, url, cursor, 4)
+        posts = crawl_pages(nodes, url, cursor, 6)
 
     return posts
 
@@ -103,7 +103,7 @@ def get_worst_posts(username, num_of_posts):
             preprocessed_text = preprocess(caption)
             result = getSentiment(preprocessed_text)
             post['sentiment'] = result
-            post['sentiment_compound'] = result['compound']
+            post['sentiment_compound'] = result['neg']
         else:
             post['sentiment'] = ""
             post['sentiment_compound'] = 0
@@ -112,9 +112,28 @@ def get_worst_posts(username, num_of_posts):
 
     sentiment_posts = map(map_sentiment_value, posts)
 
-    sort_worst = sorted(
+    worst_sentiment_sorted = sorted(
         sentiment_posts,
         key=itemgetter('sentiment_compound'),
-        reverse=False)
+        reverse=True)
 
-    return json.dumps(sort_worst[:num_of_posts])
+    return json.dumps(worst_sentiment_sorted[:num_of_posts])
+"""
+    def filter_neg_compound(post):
+        if post['sentiment_compound'] < 0:
+            return post
+
+    filter_negatives = list(
+        filter(filter_neg_compound, worst_sentiment_sorted))
+
+    # Because 'likes' is stored in a sub index called 'count' we'll map to get
+    # it out :( I know it's dirty
+    def map_likes(post):
+        likes = post['likes']['count']
+        post['likes'] = likes
+        return post
+
+    added_likes = list(map(map_likes, filter_negatives))
+
+    least_liked_posts = sorted(added_likes, key=itemgetter('likes'), reverse=False)
+"""
