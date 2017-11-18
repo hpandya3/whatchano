@@ -5,9 +5,13 @@ from operator import itemgetter
 from preprocessing.preprocessing import preprocess
 from sentiment_analysis.sentiment import getSentiment
 
-def get_cursor(raw_data):
+def get_cursor(raw_data, method):
     
-    page_info = raw_data['user']['media']['page_info']
+    if method == 'username':
+        page_info = raw_data['user']['media']['page_info']
+    elif method == 'tag':
+        page_info = raw_data['tag']['media']['page_info']
+
     has_next_page = page_info['has_next_page']
 
     if has_next_page == True:
@@ -18,10 +22,15 @@ def get_cursor(raw_data):
     return None
 
 
-def get_posts(url, raw):
+def get_posts(method, url, raw):
 
-    cursor = get_cursor(raw)
-    nodes = raw['user']['media']['nodes']
+    if method == 'username':
+        nodes = raw['user']['media']['nodes']
+
+    elif method == 'tag':
+        nodes = raw['tag']['media']['nodes']
+
+    cursor = get_cursor(raw, method)
 
     if cursor is not None:
 
@@ -29,29 +38,37 @@ def get_posts(url, raw):
         The end argument is to set a limit to the number of pages to crawl. If
         placed to 0 it will be all pages.
         """
-        posts = crawl_pages(nodes, url, cursor, 6)
+        posts = crawl_pages(nodes, url, method, cursor, 20)
+
+    else:
+        posts = nodes
 
     return posts
 
 
-def crawl_pages(result, url, cursor, limit=0, count=0):
+def crawl_pages(result, url, method, cursor, limit=0, count=0):
 
     next_page_url = url + "&max_id=" + cursor
 
     fetch_additional = requests.get(next_page_url).json()
-    new_nodes = fetch_additional['user']['media']['nodes']
+
+    if method == 'username':
+        new_nodes = fetch_additional['user']['media']['nodes']
+    elif method == 'tag':
+        new_nodes = fetch_additional['tag']['media']['nodes']
+
     append_results = result + new_nodes
 
-    next_cursor = get_cursor(fetch_additional)
+    next_cursor = get_cursor(fetch_additional, method)
 
     if next_cursor is not None:
 
         if limit == 0:
-            return crawl_pages(append_results, url, next_cursor)
+            return crawl_pages(append_results, url, method, next_cursor)
 
         elif count < limit:
             count = count + 1
-            return crawl_pages(append_results, url, next_cursor, limit, count)
+            return crawl_pages(append_results, url, method, next_cursor, limit, count)
 
     return append_results
 
@@ -71,29 +88,40 @@ def store_in_hashtags(posts):
     return updated_posts
 
 
-def get_instagram_results(username):
+def get_instagram_results(query, method):
 
-    url = "https://www.instagram.com/" + username +"/?__a=1"
+    if method == 'username':
+        url = "https://www.instagram.com/" + query +"/?__a=1"
+
+    elif method == 'tag':
+        url = "https://www.instagram.com/explore/tags/" + query + "/?__a=1"
+    
+    else:
+        return 0
 
     fetch_data = requests.get(url)
     feed = fetch_data.json()
 
-    posts = get_posts(url, feed)
-
-    full_name = feed['user']['full_name']
-
+    posts = get_posts(method, url, feed)
     append_hashtags = store_in_hashtags(posts)
 
     final_out = dict()
-    final_out['full_name'] = full_name
     final_out['posts'] = append_hashtags
+
+    if method == 'username':
+        name = feed['user']['full_name']
+        final_out['full_name'] = name
+
+    elif method == 'tag':
+        name = feed['tag']['name']
+        final_out['name'] = name
 
     return final_out
 
 
-def get_worst_posts(username, num_of_posts):
+def get_worst_posts(query, method, num_of_posts):
 
-    insta_results = get_instagram_results(username)
+    insta_results = get_instagram_results(query, method)
 
     posts = insta_results['posts']
 
@@ -103,21 +131,23 @@ def get_worst_posts(username, num_of_posts):
             preprocessed_text = preprocess(caption)
             result = getSentiment(preprocessed_text)
             post['sentiment'] = result
-            post['sentiment_compound'] = result['neg']
+            post['sentiment_neg'] = result['compound']
         else:
             post['sentiment'] = ""
-            post['sentiment_compound'] = 0
+            post['sentiment_neg'] = 0
 
         return post
 
-    sentiment_posts = map(map_sentiment_value, posts)
+    sentiment_posts = list(map(map_sentiment_value, posts))
 
     worst_sentiment_sorted = sorted(
         sentiment_posts,
-        key=itemgetter('sentiment_compound'),
-        reverse=True)
+        key=itemgetter('sentiment_neg'),
+        reverse=False)
 
-    return json.dumps(worst_sentiment_sorted[:num_of_posts])
+    insta_results['posts'] = worst_sentiment_sorted[:num_of_posts]
+
+    return json.dumps(insta_results)
 """
     def filter_neg_compound(post):
         if post['sentiment_compound'] < 0:
