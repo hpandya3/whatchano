@@ -7,4 +7,14 @@ app = Flask(__name__)
 
 def init():
     return render_template('index.html')
-   #return 'Hello, is it me you\'re looking for?'
+
+
+@app.route('/ipost/<username>')
+def get_igram_posts(username):
+    # Get the instagram posts of the user
+    return 'Username %s' % username 
+
+@app.route('/tpost/<username>')
+def show_post(username):
+    # show the post with the given id, the id is an integer
+    return 'Username %s' % username
