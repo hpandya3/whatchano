@@ -1,1 +1,1 @@
-from .instagram import get_instagram_results
+from .instagram import get_worst_posts

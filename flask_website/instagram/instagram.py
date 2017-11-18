@@ -1,6 +1,9 @@
 import requests
 import json
 import re
+from operator import itemgetter
+from preprocessing.preprocessing import preprocess
+from sentiment_analysis.sentiment import getSentiment
 
 def get_cursor(raw_data):
     
@@ -22,12 +25,16 @@ def get_posts(url, raw):
 
     if cursor is not None:
 
-        posts = crawl_pages(nodes, url, cursor)
+        """
+        The end argument is to set a limit to the number of pages to crawl. If
+        placed to 0 it will be all pages.
+        """
+        posts = crawl_pages(nodes, url, cursor, 4)
 
     return posts
 
 
-def crawl_pages(result, url, cursor):
+def crawl_pages(result, url, cursor, limit=0, count=0):
 
     next_page_url = url + "&max_id=" + cursor
 
@@ -38,7 +45,13 @@ def crawl_pages(result, url, cursor):
     next_cursor = get_cursor(fetch_additional)
 
     if next_cursor is not None:
-        return crawl_pages(append_results, url, next_cursor)
+
+        if limit == 0:
+            return crawl_pages(append_results, url, next_cursor)
+
+        elif count < limit:
+            count = count + 1
+            return crawl_pages(append_results, url, next_cursor, limit, count)
 
     return append_results
 
@@ -75,4 +88,33 @@ def get_instagram_results(username):
     final_out['full_name'] = full_name
     final_out['posts'] = append_hashtags
 
-    return json.dumps(final_out)
+    return final_out
+
+
+def get_worst_posts(username, num_of_posts):
+
+    insta_results = get_instagram_results(username)
+
+    posts = insta_results['posts']
+
+    def map_sentiment_value(post):
+        if 'caption' in post:
+            caption = post['caption']
+            preprocessed_text = preprocess(caption)
+            result = getSentiment(preprocessed_text)
+            post['sentiment'] = result
+            post['sentiment_compound'] = result['compound']
+        else:
+            post['sentiment'] = ""
+            post['sentiment_compound'] = 0
+
+        return post
+
+    sentiment_posts = map(map_sentiment_value, posts)
+
+    sort_worst = sorted(
+        sentiment_posts,
+        key=itemgetter('sentiment_compound'),
+        reverse=False)
+
+    return json.dumps(sort_worst[:num_of_posts])
