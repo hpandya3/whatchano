@@ -1,4 +1,4 @@
-from twitter.twitter import getUserTweets
+from twitter.twitter import getUserTweetObjects
 
-getUserTweets('DanBilzerian', 5)
+getUserTweetObjects('realDonaldTrump', 5)
 
