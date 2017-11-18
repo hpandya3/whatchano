@@ -87,6 +87,9 @@ celerybeat-schedule
 venv/
 ENV/
 
+# Local settings
+local_settings.py
+
 #vscode
 .vscode
 .vscode/
