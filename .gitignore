@@ -90,6 +90,10 @@ ENV/
 # Local settings
 local_settings.py
 
+#vscode
+.vscode
+.vscode/
+
 # Spyder project settings
 .spyderproject
 .spyproject
