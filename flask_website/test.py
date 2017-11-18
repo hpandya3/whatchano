@@ -1,4 +1,4 @@
-from twitter.twitter import getUserTweetObjects
-
-getUserTweetObjects('realDonaldTrump', 5)
-
+from twitter.tweetcontainer import TweetContainer
+tweetContainer = TweetContainer('realDonaldTrump')
+tweetContainer.load(5)
+print(tweetContainer.__dict__)
