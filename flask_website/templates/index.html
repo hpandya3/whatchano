@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link href="./static/css/landing-page.min.css" rel="stylesheet">
 
+    <link href="./static/css/showstyle.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -30,23 +32,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-8 col-xl-6 mx-auto">
-                    <form>
+                    <!-- <form> -->
                         <div class="form-row">
                             <div class="col-12 col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter your Name..." style="margin-bottom: 10px">
+                                <input type="text" class="form-control form-control-lg" id="name" placeholder="Enter your Name..." style="margin-bottom: 10px">
                             </div>
                             <div class="col-12 col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control form-control-lg" style="margin-bottom: 10px" placeholder="Social Handle...">
+                                <input type="text" class="form-control form-control-lg" id="handle" style="margin-bottom: 10px" placeholder="Social Handle...">
                             </div>
 
                             <div class="col-12 col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control form-control-lg" style="margin-bottom: 10px;" placeholder="#Hashtag">
+                                <input type="text" class="form-control form-control-lg" id="hashtag" style="margin-bottom: 10px;" placeholder="#Hashtag">
                             </div>
                             <div class="col-12 col-md-6 mb-2 mb-md-0">
-                                <button type="submit" class="btn btn-block btn-lg btn-primary" style="margin-left: 50%">Search up!</button>
+                                <button id="showmebutton" class="btn btn-block btn-lg btn-primary" style="margin-left: 50%">Search up!</button>
                             </div>
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
                 <div class="col-md-6 col-lg-8 col-xl-6 mx-auto">
                     <form action="/file-upload" class="dropzone">
@@ -60,8 +62,10 @@
         </div>
     </header>
 
+    
 
-    <div class="container">
+   
+    <div id="showme" class="container" style="display: none">
             <div class="row">
                     <div class="col-md">
                             <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
@@ -85,8 +89,33 @@
                         </blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>  
                     </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md">
+                    <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                            <a href="https://twitter.com/i/status/930981685658902528"></a>
+                    </blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div class="col-md">
+                    <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                            <a href="https://twitter.com/i/status/930981685658902528"></a>
+                    </blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+                </div>
+                <div class="col-md">
+                    <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                            <a href="https://twitter.com/i/status/930981685658902528"></a>
+                    </blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+                </div>
+            </div>
+    </div>
 
+
+
+      
+
+        
 
     <!-- Icons Grid -->
     <section id="Instagram" class="bg-light text-center">
@@ -107,10 +136,7 @@
                     <tbody>
                         <tr data-status="pagado">
                             
-                            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-                                <a href="https://twitter.com/DanBilzerian/status/929673977340993536?ref_src=twsrc%5Etfw"></a>
-                            </blockquote>
-                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            
                         </tr>
 
 
@@ -120,77 +146,7 @@
         </section>
         <br/>
 
-        <!--
-        <h1>Here's what we know from Twitter:</h1>
-        <section id="Twitter" class="content">
-            <div style="width:90%;margin-left:auto;margin-right: auto;">
-                <table class="table table-filter" style=" margin: 0 auto">
-                    <tbody>
-                        <tr data-status="pagado">
-                            <td>
-                            </td>
-                            <td>
-
-                                <i class="glyphicon glyphicon-star"></i>
-
-                            </td>
-                            <td>
-                                <div class="media">
-                                    <img id="TwitterPhoto" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                                    <div class="media-body">
-                                        <span id="TwitterDate" class="media-meta pull-right">02 Oct 2017</span>
-                                        <h4 class="title" id="TwitterUsername">
-                                            Twitter user Name
-                                            <span id="level" class="pull-right pagado">(Safe)</span>
-                                        </h4>
-                                        <p id="TwitterContext" class="summary">Twitter content</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <br/>
-        <h1>Here's what we know from LinkedIn:</h1>
-        <section id="linkedIn" class="content">
-            <div style="width:90%;margin-left:auto;margin-right: auto;">
-                <table class="table table-filter" style=" margin: 0 auto">
-                    <tbody>
-                        <tr data-status="pagado">
-                            <td>
-                            </td>
-                            <td>
-
-                                <i class="glyphicon glyphicon-star"></i>
-
-                            </td>
-                            <td>
-                                <div class="media">
-                                    <img id="LinkedInPhoto" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-                                    <div class="media-body">
-                                        <span id="TwitterDate" class="media-meta pull-right">02 Oct 2017</span>
-                                        <h4 class="title" id="LinkedInUsername">
-                                            Twitter user Name
-                                            <span id="level" class="pull-right pagado">(Safe)</span>
-                                        </h4>
-                                        <p id="LinkedInContext" class="summary">Twitter content</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </section>
-    -->
-
+      
     <!-- Footer -->
     <footer class="footer bg-light">
         <div class="container">
@@ -418,11 +374,17 @@
     <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./static/vendor/jquery/dropzone.js"></script>
     <script>
-        var myDropzone = new Dropzone("div#myId", {
-            url: "/file/post"
-        });
+        // var myDropzone = new Dropzone("div#myId", {
+        //     url: "/file/post"
+        // });
         //        table filter
         $(document).ready(function() {
+
+     
+            $("#showmebutton").click(function(){
+                $("#showme").show();
+            });
+
 
             $('.star').on('click', function() {
                 $(this).toggleClass('star-checked');
@@ -443,9 +405,9 @@
             });
 
         });
-        document.getElementById("InstagramPhoto").src = ;
-        document.getElementById("TwitterPhoto").src = ;
-        document.getElementById("LinkedInPhoto").src = ;
+        // document.getElementById("InstagramPhoto").src = ;
+        // document.getElementById("TwitterPhoto").src = ;
+        // document.getElementById("LinkedInPhoto").src = ;
 
         var table = document.createElement('table');
     </script>

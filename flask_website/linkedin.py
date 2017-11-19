@@ -11,4 +11,8 @@ def getGoogleSearch(name):
     try:
         search_string = name.replace(" ", "+")
         url = "https://www.googleapis.com/customsearch/v1?key=" + config["googleapi_key"] + "cx=" + config["custom_searchengine_id"] + "&q=" + search_string
-        r = requests.get('')
+        r = requests.get(url)
+
+
+        
+        
