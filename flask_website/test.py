@@ -1,4 +1,4 @@
-from twitter.twitter import getUserTweets
-
-getUserTweets('DanBilzerian', 5)
-
+from twitter.tweetcontainer import TweetContainer
+tweetContainer = TweetContainer('realDonaldTrump')
+tweetContainer.load(20)
+print(tweetContainer.toDict(3))

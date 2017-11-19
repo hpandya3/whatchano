@@ -2,10 +2,10 @@ import requests
 import json
 import re
 from operator import itemgetter
-from preprocessing.preprocessing import preprocess
-from sentiment_analysis.sentiment import getSentiment
-from local_settings import *
-from cognitive_services.face_api import analysis
+from flask_website.preprocessing.preprocessing import preprocess
+from flask_website.sentiment_analysis.sentiment import getSentiment
+from flask_website.local_settings import *
+from flask_website.cognitive_services.face_api import analysis
 
 def get_cursor(raw_data, method):
     
