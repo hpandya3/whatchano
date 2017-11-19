@@ -8,7 +8,7 @@ from local_settings import *
 from cognitive_services.face_api import analysis
 
 def get_cursor(raw_data, method):
-    
+
     if method == 'username':
         page_info = raw_data['user']['media']['page_info']
     elif method == 'tag':
@@ -97,7 +97,7 @@ def get_instagram_results(query, method):
 
     elif method == 'tag':
         url = "https://www.instagram.com/explore/tags/" + query + "/?__a=1"
-    
+
     else:
         return 0
 
@@ -162,7 +162,7 @@ def get_worst_posts(query, method, num_of_posts):
 
     cognitive_results = analysis(AZURE_FACE_API_TOKEN, sentiment_results, emotions)
 
-    insta_results['posts'] = cognitive_results
+    insta_results['posts'] = cognitive_results[:num_of_posts]
 
     return json.dumps(insta_results)
 """
