@@ -62,7 +62,7 @@
         </div>
     </header>
 
-        
+
 
     <!-- Icons Grid -->
     <section id="instagram" class="bg-light text-center" style="display: none">
@@ -73,7 +73,7 @@
                         <div class="row" id="ipost">
                         </div>
                 </div>
-   
+
         </section>
 </section>
 
@@ -88,7 +88,7 @@
         </section>
 </section>
 
-      
+
     <!-- Footer -->
     <footer class="footer bg-light">
         <div class="container">
@@ -322,56 +322,82 @@
         //        table filter
         $(document).ready(function() {
 
-     
             $("#showmebutton").click(function(){
                 var username;
                 username = $("#handle").val();
-                console.log(username);
-                
-                $.ajax({
-                    url: '/ipost/'+ username,
-                    type: 'GET'
-                }).done(function(data){
-                    let posts = data.posts;
-                    
-                    posts.forEach(function(post){
-                        $("#instagram").show();
-                        let code = post.code;
-                        let html = '<div class="col-md">' +
-                            '<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">'+
-                                    '<p style=" margin:8px 0 0 0; padding:0 4px;">' +
-                                         '<a href="https://www.instagram.com/p/' + code + '" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>' +
-                                    '</p>' + 
-                            '</blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"><\/script>' +
-                        '</div>';
-                        $('#ipost').append(html);
+                var hashtag = $("#hashtag").val();
+
+                if (username !== "") {
+
+                    $.ajax({
+                        url: '/ipost/'+ username,
+                        type: 'GET'
+                    }).done(function(data){
+                        let posts = data.posts;
+
+                        posts.forEach(function(post){
+                            $("#instagram").show();
+                            let code = post.code;
+                            let html = '<div class="col-md">' +
+                                '<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">'+
+                                        '<p style=" margin:8px 0 0 0; padding:0 4px;">' +
+                                             '<a href="https://www.instagram.com/p/' + code + '" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>' +
+                                        '</p>' +
+                                '</blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"><\/script>' +
+                            '</div>';
+                            $('#ipost').append(html);
+
+                        });
 
                     });
 
-                });
+                    $.ajax({
+                        url: '/tpost/'+ username + '/3',
+                        type: 'GET'
+                    }).done(function(data){
+                        let posts = data.tweets;
 
-                $.ajax({
-                    url: '/tpost/'+ username + '/3',
-                    type: 'GET'
-                }).done(function(data){
-                    let posts = data.tweets;
-                    
-                    posts.forEach(function(post){
-                        let url = post.url;
-                        $("#twitter").show();
-                        let html = `<div class="col-md">
-                            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-                                    <a href="${url}"></a>
-                            </blockquote>
-                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>
-                        </div>`;
-                        $('#tweets').append(html);
+                        posts.forEach(function(post){
+                            let url = post.url;
+                            $("#twitter").show();
+                            let html = `<div class="col-md">
+                                <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                                        <a href="${url}"></a>
+                                </blockquote>
+                                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>
+                            </div>`;
+                            $('#tweets').append(html);
+
+                        });
 
                     });
 
-                });
-                    
-                
+               }
+
+               else if (hashtag !== "") {
+
+                    $.ajax({
+                        url: '/ipost/tag/'+ hashtag,
+                        type: 'GET'
+                    }).done(function(data){
+                        let posts = data.posts;
+
+                        posts.forEach(function(post){
+                            $("#instagram").show();
+                            let code = post.code;
+                            let html = '<div class="col-md">' +
+                                '<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">'+
+                                        '<p style=" margin:8px 0 0 0; padding:0 4px;">' +
+                                             '<a href="https://www.instagram.com/p/' + code + '" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>' +
+                                        '</p>' +
+                                '</blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"><\/script>' +
+                            '</div>';
+                            $('#ipost').append(html);
+
+                        });
+
+                    });
+               }
             });
 
 
