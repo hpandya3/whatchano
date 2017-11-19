@@ -1,8 +1,10 @@
 from flask import Flask
 from flask import render_template
 from flask import jsonify
+
 from twitter.tweetcontainer import TweetContainer
-import json
+from flask import Response
+from instagram import get_worst_posts
 
 app = Flask(__name__)
 
@@ -14,11 +16,17 @@ def init():
 
 @app.route('/ipost/<username>')
 def get_igram_posts(username):
-    # Get the instagram posts of the user
-    return 'Username %s' % username
+    result = get_worst_posts(username, 'username', 3)
+    return Response(result, mimetype='application/json')
 
 @app.route('/tpost/<username>/<count>')
 def show_tweets(username, count):
     tweetContainer = TweetContainer(username)
     tweetContainer.load(20)
     return jsonify(tweetContainer.toDict(int(count)))
+
+@app.route('/ipost/tag/<tag>')
+def get_igram_posts_from_tag(tag):
+    # Get the instagram posts of the user
+    result = get_worst_posts(tag, 'tag', 3)
+    return Response(result, mimetype='application/json')
