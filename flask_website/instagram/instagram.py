@@ -4,6 +4,8 @@ import re
 from operator import itemgetter
 from preprocessing.preprocessing import preprocess
 from sentiment_analysis.sentiment import getSentiment
+from local_settings import *
+from cognitive_services.face_api import analysis
 
 def get_cursor(raw_data, method):
     
@@ -38,7 +40,7 @@ def get_posts(method, url, raw):
         The end argument is to set a limit to the number of pages to crawl. If
         placed to 0 it will be all pages.
         """
-        posts = crawl_pages(nodes, url, method, cursor, 20)
+        posts = crawl_pages(nodes, url, method, cursor, 10)
 
     else:
         posts = nodes
@@ -131,10 +133,10 @@ def get_worst_posts(query, method, num_of_posts):
             preprocessed_text = preprocess(caption)
             result = getSentiment(preprocessed_text)
             post['sentiment'] = result
-            post['sentiment_neg'] = result['compound']
+            post['sentiment_compound'] = result['compound']
         else:
             post['sentiment'] = ""
-            post['sentiment_neg'] = 0
+            post['sentiment_compound'] = 0
 
         return post
 
@@ -142,10 +144,25 @@ def get_worst_posts(query, method, num_of_posts):
 
     worst_sentiment_sorted = sorted(
         sentiment_posts,
-        key=itemgetter('sentiment_neg'),
+        key=itemgetter('sentiment_compound'),
         reverse=False)
 
-    insta_results['posts'] = worst_sentiment_sorted[:num_of_posts]
+    sentiment_results = worst_sentiment_sorted[:10]
+
+    emotions = {
+        "anger": 0,
+        "contempt": 0,
+        "disgust": 0,
+        "fear": 0,
+        "happiness": 0.5,
+        "neutral": 0,
+        "sadness": 0,
+        "surprise": 0
+    }
+
+    cognitive_results = analysis(AZURE_FACE_API_TOKEN, sentiment_results, emotions)
+
+    insta_results['posts'] = cognitive_results
 
     return json.dumps(insta_results)
 """
