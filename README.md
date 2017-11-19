@@ -20,3 +20,30 @@ virtualenv -p python3 env
 ```
 pip3 install -r requirement.txt
 ```
+
+### API Keys
+
+Twitter and Microsoft Azure Face API keys are requires to run this app.
+
+Face API
+https://azure.microsoft.com/en-au/try/cognitive-services/?api=face-api
+
+Twitter API
+
+Once you have the keys, you're required to create the following:
+
+```
+touch flask_website/local_settings.py
+```
+
+```
+vi flask_website/local_settings.py
+```
+
+```
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
+TWITTER_ACCESS_TOKEN = ''
+TWITTER_ACCESS_TOKEN_SECRET = ''
+AZURE_FACE_API_TOKEN = ''
+```
