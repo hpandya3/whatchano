@@ -1,3 +1,453 @@
-<!doctype html>
-<title>Hello from Flask</title>
-  <h1>Hello, World!</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Watcha No?</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="./static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="./static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./static/css/dropzone.css" />
+    <!-- Custom styles for this template -->
+    <link href="./static/css/landing-page.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+        <h1 style="margin-top: -10%; margin-bottom: 5%">Whatcha No?</h1>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-8 col-xl-6 mx-auto">
+                    <form>
+                        <div class="form-row">
+                            <div class="col-12 col-md-12 mb-2 mb-md-0">
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter your Name..." style="margin-bottom: 10px">
+                            </div>
+                            <div class="col-12 col-md-12 mb-2 mb-md-0">
+                                <input type="text" class="form-control form-control-lg" style="margin-bottom: 10px" placeholder="Social Handle...">
+                            </div>
+
+                            <div class="col-12 col-md-12 mb-2 mb-md-0">
+                                <input type="text" class="form-control form-control-lg" style="margin-bottom: 10px;" placeholder="#Hashtag">
+                            </div>
+                            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                                <button type="submit" class="btn btn-block btn-lg btn-primary" style="margin-left: 50%">Search up!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 col-lg-8 col-xl-6 mx-auto">
+                    <form action="/file-upload" class="dropzone">
+                        <div class="fallback">
+                            <input name="file" type="file" multiple style="max-height: 180px;" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container">
+            <div class="row">
+                    <div class="col-md">
+                            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                    <p style=" margin:8px 0 0 0; padding:0 4px;">
+                                         <a href="https://www.instagram.com/p/BabUcxhHwTr/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>
+                                    </p> 
+                            </blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>        
+                    </div>
+                    <div class="col-md">
+                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <p style=" margin:8px 0 0 0; padding:0 4px;">
+                                        <a href="https://www.instagram.com/p/BabUcxhHwTr/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>
+                                </p> 
+                        </blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>        
+                    </div>
+                    <div class="col-md">
+                        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                                <p style=" margin:8px 0 0 0; padding:0 4px;">
+                                        <a href="https://www.instagram.com/p/BabUcxhHwTr/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Island life</a>
+                                </p> 
+                        </blockquote> <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>  
+                    </div>
+            </div>
+        </div>
+
+
+    <!-- Icons Grid -->
+    <section id="Instagram" class="bg-light text-center">
+        <br/>
+        <h1>Here's what we know from Instagram:</h1>
+        <section class="content">
+            <div class="btn-group" style="margin-bottom: 1rem;">
+                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Safe</button>
+                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Average</button>
+                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Danger</button>
+            </div>
+
+            
+            <div id="InstagramSection" style="width:90%;margin-left:auto;margin-right: auto;">
+ 
+                <table class="table table-filter" style=" margin: 0 auto">
+
+                    <tbody>
+                        <tr data-status="pagado">
+                            
+                            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                                <a href="https://twitter.com/DanBilzerian/status/929673977340993536?ref_src=twsrc%5Etfw"></a>
+                            </blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <br/>
+
+        <!--
+        <h1>Here's what we know from Twitter:</h1>
+        <section id="Twitter" class="content">
+            <div style="width:90%;margin-left:auto;margin-right: auto;">
+                <table class="table table-filter" style=" margin: 0 auto">
+                    <tbody>
+                        <tr data-status="pagado">
+                            <td>
+                            </td>
+                            <td>
+
+                                <i class="glyphicon glyphicon-star"></i>
+
+                            </td>
+                            <td>
+                                <div class="media">
+                                    <img id="TwitterPhoto" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                    <div class="media-body">
+                                        <span id="TwitterDate" class="media-meta pull-right">02 Oct 2017</span>
+                                        <h4 class="title" id="TwitterUsername">
+                                            Twitter user Name
+                                            <span id="level" class="pull-right pagado">(Safe)</span>
+                                        </h4>
+                                        <p id="TwitterContext" class="summary">Twitter content</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <br/>
+        <h1>Here's what we know from LinkedIn:</h1>
+        <section id="linkedIn" class="content">
+            <div style="width:90%;margin-left:auto;margin-right: auto;">
+                <table class="table table-filter" style=" margin: 0 auto">
+                    <tbody>
+                        <tr data-status="pagado">
+                            <td>
+                            </td>
+                            <td>
+
+                                <i class="glyphicon glyphicon-star"></i>
+
+                            </td>
+                            <td>
+                                <div class="media">
+                                    <img id="LinkedInPhoto" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                    <div class="media-body">
+                                        <span id="TwitterDate" class="media-meta pull-right">02 Oct 2017</span>
+                                        <h4 class="title" id="LinkedInUsername">
+                                            Twitter user Name
+                                            <span id="level" class="pull-right pagado">(Safe)</span>
+                                        </h4>
+                                        <p id="LinkedInContext" class="summary">Twitter content</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+    -->
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap 2017. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                  <i class="fa fa-facebook fa-2x fa-fw"></i>
+                </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                  <i class="fa fa-twitter fa-2x fa-fw"></i>
+                </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                  <i class="fa fa-instagram fa-2x fa-fw"></i>
+                </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <style>
+        #dropzone {
+            margin-bottom: 3rem;
+        }
+
+        .dropzone {
+            border: 2px dashed #0087F7;
+            border-radius: 5px;
+            background: white;
+            color: black
+        }
+
+        .dropzone .dz-message {
+            font-weight: 400;
+        }
+
+        .dropzone .dz-message .note {
+            font-size: 0.8em;
+            font-weight: 200;
+            display: block;
+            margin-top: 1.4rem;
+        }
+
+        form {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /*  table filter */
+
+        .panel {
+            border: 1px solid #ddd;
+            background-color: #fcfcfc;
+        }
+
+        .panel .btn-group {
+            margin: 15px 0 30px;
+        }
+
+        .panel .btn-group .btn {
+            transition: background-color .3s ease;
+        }
+
+        .table-filter {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+
+
+        .table-filter tbody tr td {
+            padding: 10px;
+            vertical-align: middle;
+            border-top-color: #eee;
+        }
+
+        .table-filter tbody tr.selected td {
+            background-color: #eee;
+        }
+
+        .table-filter tr td:first-child {
+            width: 38px;
+        }
+
+        .table-filter tr td:nth-child(2) {
+            width: 35px;
+        }
+
+        .ckbox {
+            position: relative;
+        }
+
+        .ckbox input[type="checkbox"] {
+            opacity: 0;
+        }
+
+        .ckbox label {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .ckbox label:before {
+            content: '';
+            top: 1px;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            display: block;
+            position: absolute;
+            border-radius: 2px;
+            border: 1px solid #bbb;
+            background-color: #fff;
+        }
+
+        .ckbox input[type="checkbox"]:checked+label:before {
+            border-color: #2BBCDE;
+            background-color: #2BBCDE;
+        }
+
+        .ckbox input[type="checkbox"]:checked+label:after {
+            top: 3px;
+            left: 3.5px;
+            content: '\e013';
+            color: #fff;
+            font-size: 11px;
+            font-family: 'Glyphicons Halflings';
+            position: absolute;
+        }
+
+        .table-filter .star {
+            color: #ccc;
+            text-align: center;
+            display: block;
+        }
+
+        .table-filter .star.star-checked {
+            color: #F0AD4E;
+        }
+
+        .table-filter .star:hover {
+            color: #ccc;
+        }
+
+        .table-filter .star.star-checked:hover {
+            color: #F0AD4E;
+        }
+
+        .table-filter .media-photo {
+            width: 40%;
+        }
+
+        .table-filter .media-body {
+            display: block;
+            /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+        }
+
+        .table-filter .media-meta {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .table-filter .media .title {
+            color: #2BBCDE;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: normal;
+            margin: 0;
+        }
+
+        .table-filter .media .title span {
+            font-size: .8em;
+            margin-right: 20px;
+        }
+
+        .table-filter .media .title span.pagado {
+            color: #5cb85c;
+        }
+
+        .table-filter .media .title span.pendiente {
+            color: #f0ad4e;
+        }
+
+        .table-filter .media .title span.cancelado {
+            color: #d9534f;
+        }
+
+        .table-filter .media .summary {
+            font-size: 14px;
+        }
+    </style>
+    <!-- Bootstrap core JavaScript -->
+    <script src="./static/vendor/jquery/jquery.min.js"></script>
+    <script src="./static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./static/vendor/jquery/dropzone.js"></script>
+    <script>
+        var myDropzone = new Dropzone("div#myId", {
+            url: "/file/post"
+        });
+        //        table filter
+        $(document).ready(function() {
+
+            $('.star').on('click', function() {
+                $(this).toggleClass('star-checked');
+            });
+
+            $('.ckbox label').on('click', function() {
+                $(this).parents('tr').toggleClass('selected');
+            });
+
+            $('.btn-filter').on('click', function() {
+                var $target = $(this).data('target');
+                if ($target != 'all') {
+                    $('.table tr').css('display', 'none');
+                    $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+                } else {
+                    $('.table tr').css('display', 'none').fadeIn('slow');
+                }
+            });
+
+        });
+        document.getElementById("InstagramPhoto").src = ;
+        document.getElementById("TwitterPhoto").src = ;
+        document.getElementById("LinkedInPhoto").src = ;
+
+        var table = document.createElement('table');
+    </script>
+</body>
+</html>
