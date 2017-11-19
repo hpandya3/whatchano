@@ -36,16 +36,12 @@ class Tweet:
     except AttributeError:
       return None
 
-  def getUrls(self):
+  def getUrl(self):
     """Returns simple urls"""
-    urls = []
     try:
-      for url in self.tweet.entities['urls']:
-        urls.append(url['url'])
-
-      return urls
-    except AttributeError:
-      return None    
+      return "https://twitter.com/i/status/" + str(self.tweet.id)
+    except AttributeError and TypeError:
+      return None
 
   def getRawText(self):
     return self.tweet.text
@@ -56,7 +52,9 @@ class Tweet:
   def getSentiment(self):
     return self.sentiment
 
-  def __dict__(self):
+  def toDict(self):
     tweet = {}
-    tweet['text'] = self.getRawText()
+    tweet["text"] = self.getRawText()
+    tweet["url"] = self.getUrl()
+    tweet["sentiment"] = self.getSentiment()
     return tweet

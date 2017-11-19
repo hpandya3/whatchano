@@ -15,21 +15,21 @@ def getUserTweets(screenName, count):
 
   for tweet in tweets:
     tweetObject = Tweet(tweet)
-    print('')
-    print('Tweet')
-    print('Raw Text:' + tweetObject.getRawText())
-    print('Compound Sentiment: ' + str(tweetObject.getSentiment()['compound']))
-    if tweetObject.getHashtags():
-      print(tweetObject.getHashtags())
+    # print('')
+    # print('Tweet')
+    # print('Raw Text:' + tweetObject.getRawText())
+    # print('Compound Sentiment: ' + str(tweetObject.getSentiment()['compound']))
+    # if tweetObject.getHashtags():
+    #   print(tweetObject.getHashtags())
 
-    if tweetObject.getSymbols():
-      print(tweetObject.getSymbols())
+    # if tweetObject.getSymbols():
+    #   print(tweetObject.getSymbols())
 
-    if tweetObject.getUserMentions():
-      print(tweetObject.getUserMentions())
+    # if tweetObject.getUserMentions():
+    #   print(tweetObject.getUserMentions())
     
-    if tweetObject.getUrls():
-      print(tweetObject.getUrls())
+    # if tweetObject.getUrl():
+    #   print(tweetObject.getUrl())
     
     tweetObjects.append(tweetObject)
 

@@ -10,18 +10,25 @@ class TweetContainer:
     self.tweets = getUserTweets(self.screenName, count)
 
   def getWorstTweets(self, count):
-    newlist = sorted(self.tweets, key=lambda x: x.getSentiment()['neg'], reverse=True)
-    return newlist[:count]
+    worstTweets = sorted(self.tweets, key=lambda x: x.getSentiment()['compound'], reverse=False)
+    if len(worstTweets) < count:
+      return worstTweets[:-1]
+    else:
+      return worstTweets[:count]
 
-  def __dict__(self):
+  def toDict(self, count):
     tweetContainer = {}
-    tweetContainer['name'] = self.userName
+    tweetContainer["screen_name"] = self.screenName
+    tweetContainer["name"] = self.userName
 
     # Get all tweets
     tweets = []
-    for tweet in self.getWorstTweets(10):
-      tweets.append(tweet.__dict__)
-    tweetContainer['tweets'] = tweets
+
+    # Get the worst tweets
+    for tweet in self.getWorstTweets(count):
+      tweets.append(tweet.toDict())
+    
+    tweetContainer["tweets"] = tweets
 
     return tweetContainer
     
