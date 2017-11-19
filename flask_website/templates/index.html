@@ -62,54 +62,31 @@
         </div>
     </header>
 
-    
-
-   
-    <div id="showme" class="container" style="display: none">
-            <div class="row" id="ipost">
-                    
-
-            </div>
-            <div class="row" id="tweets">
-                
-
-            </div>
-    </div>
-
-
-
-      
-
         
 
     <!-- Icons Grid -->
-    <section id="Instagram" class="bg-light text-center">
+    <section id="instagram" class="bg-light text-center" style="display: none">
         <br/>
         <h1>Here's what we know from Instagram:</h1>
         <section class="content">
-            <div class="btn-group" style="margin-bottom: 1rem;">
-                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Safe</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Average</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Danger</button>
-            </div>
-
-            
-            <div id="InstagramSection" style="width:90%;margin-left:auto;margin-right: auto;">
- 
-                <table class="table table-filter" style=" margin: 0 auto">
-
-                    <tbody>
-                        <tr data-status="pagado">
-                            
-                            
-                        </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
+                <div id="showme" class="container" >
+                        <div class="row" id="ipost">
+                        </div>
+                </div>
+   
         </section>
+</section>
+
+<section id="twitter" class="bg-light text-center" style="display: none">
         <br/>
+        <h1>Here's what we know from Twitter:</h1>
+        <section class="content">
+                <div id="showagain" class="container">
+                        <div class="row justify-content-md-center" id="tweets">
+                        </div>
+                </div>
+        </section>
+</section>
 
       
     <!-- Footer -->
@@ -348,7 +325,6 @@
      
             $("#showmebutton").click(function(){
                 var username;
-                $("#showme").show();
                 username = $("#handle").val();
                 console.log(username);
                 
@@ -359,6 +335,7 @@
                     let posts = data.posts;
                     
                     posts.forEach(function(post){
+                        $("#instagram").show();
                         let code = post.code;
                         let html = '<div class="col-md">' +
                             '<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="7" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:400px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">'+
@@ -381,6 +358,7 @@
                     
                     posts.forEach(function(post){
                         let url = post.url;
+                        $("#twitter").show();
                         let html = `<div class="col-md">
                             <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
                                     <a href="${url}"></a>
