@@ -22,7 +22,7 @@ def get_igram_posts(username):
 @app.route('/tpost/<username>/<count>')
 def show_tweets(username, count):
     tweetContainer = TweetContainer(username)
-    tweetContainer.load(20)
+    tweetContainer.load(100)
     return jsonify(tweetContainer.toDict(int(count)))
 
 @app.route('/ipost/tag/<tag>')
