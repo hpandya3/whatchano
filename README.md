@@ -18,7 +18,7 @@ virtualenv -p python3 env
 1. Clone repository
 2. Navigate to the back-end folder and download python dependencies<br>
 ```
-pip3 install -r requirement.txt
+pip3 install -r requirements.txt
 ```
 
 ### API Keys
